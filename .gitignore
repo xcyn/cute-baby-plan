@@ -1,0 +1,14 @@
+node_modules
+/dist
+/blogs
+/servers/dist
+/servers/package-lock.json
+/client/package-lock.json
+/servers/node_modules
+/client/node_modules
+
+# Editor directories and files
+.idea
+.vscode
+.history/
+logs/

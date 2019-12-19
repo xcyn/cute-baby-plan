@@ -1,0 +1,27 @@
+{
+  "name": "cute-baby-plan-service",
+  "version": "1.0.0",
+  "description": "萌宝计划-后端-node",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development nodemon --nolazy index.js",
+    "debug": "cross-env NODE_ENV=development nodemon --nolazy --inspect-brk index.js"
+  },
+  "author": "xiongchuanyu",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cookies": "^0.7.3",
+    "cross-env": "^5.2.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "pm2": "^3.4.0",
+    "qs": "^6.6.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "chalk": "^3.0.0",
+    "nodemon": "^1.18.9"
+  }
+}
