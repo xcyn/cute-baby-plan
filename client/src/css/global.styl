@@ -1,0 +1,72 @@
+
+*,
+*:before,
+*:after 
+    max-height 100000px
+    box-sizing border-box
+    -webkit-overflow-scrolling touch
+html, body, ul, li, ol, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img{margin:0; padding:0;}
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none;}
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0}
+select, input { vertical-align:middle; -webkit-appearance: none;}
+select, input, textarea { font-size:12px; margin:0; }
+textarea { resize:none; } /*防止拖动*/
+img {border:0; vertical-align:middle; }/*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table { border-collapse:collapse; }
+.clearfix:before,.clearfix:after {/*清楚浮动*/
+    content:"";
+    display:table;
+}
+.clearfix:after{clear:both;}
+a {color:#666; text-decoration:none; }
+a:hover{color:#C81623;}
+h1,h2,h3,h4,h5,h6{text-decoration:none;font-weight:normal;font-size:100%;}
+s,i,em{font-style:normal;text-decoration:none;}
+.col-red{color: #C81623!important;}
+.fl
+    float left
+.fr
+    float right
+.al
+    text-align left
+.ac 
+    text-align center
+.ar 
+    text-align right
+.hide
+    display none
+html,
+body
+    min-height 100%
+    background #f8f8f8
+    box-sizing border-box
+    -webkit-touch-callout:none; /*系统默认菜单被禁用*/
+    user-select:none
+body
+    font-family Helvetica,Tahoma,Arial,PingFang SC,Hiragino Sans GB,Heiti SC,STXihei,Microsoft YaHei,SimHei,WenQuanYi Micro Hei!important !important
+a
+    text-decoration none
+    &:hover
+        text-decoration none
+.flex-center
+    display flex
+    justify-content center
+    align-items center
+    height 100%
+.flex-spaceBwtween
+    display flex
+    justify-content space-between
+.flex-start
+    display flex
+    justify-content flex-start
+for i in 5 10 20 30 40 50
+    .pt{i}
+        padding-top i px
+    .mt{i}
+        margin-top i px
+.lh1
+    line-height 1
+.flex0
+    flex none
+
