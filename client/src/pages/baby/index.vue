@@ -19,18 +19,18 @@
         </div>
       </div>
     </div>
-    <div class="ranking mt10">
+    <div class="ranking mt5">
       <div class="tabs lh1 flex-spaceBwtween">
-        <div class="tab participants bb3 flex0">
-          <div>参赛人数</div>
+        <div :class="{'bb3': $route.path === '/baby/all' }" class="tab participants flex0" @click="handleGo('/baby/all')">
+          <div>参与人员</div>
         </div>
-        <div class="tab votes bb3 flex0">
-          <div>投票人数</div>
-        </div>
-        <div class="tab visits bb3 flex0">
-          <div>访问量</div>
+        <div :class="{'bb3': $route.path === '/baby/rank' }"  class="tab votes flex0" @click="handleGo('/baby/rank')">
+          <div>排名榜</div>
         </div>
       </div>
+    </div>
+    <div class="view">
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -47,6 +47,11 @@ export default {
         };
     },
     methods: {
+      handleGo(path) {
+        this.$router.push({
+          path
+        })
+      }
     },
     created() {
     }
@@ -65,7 +70,7 @@ export default {
   font-size 15px
 .ranking
   background-color #fff
-  padding 0 30px
+  padding 0 50px
   text-align center
   font-size 13px
   .tab
@@ -80,4 +85,6 @@ export default {
   border-left 1px solid rgba(0,0,0,0.05)
 .bb3
   border-bottom 3px solid red
+.view
+  padding 10px 20px
 </style>

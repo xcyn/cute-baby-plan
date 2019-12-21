@@ -32,7 +32,12 @@ const router = new VueRouter({
         {
           path: 'all',
           name: 'all',
-          component: ()=>import(/* webpackChunkName: '-all' */'@/pages/baby/all/index.vue')
+          component: ()=>import(/* webpackChunkName: 'baby-all' */'@/pages/baby/all/index.vue')
+        },
+        {
+          path: 'rank',
+          name: 'rank',
+          component: ()=>import(/* webpackChunkName: 'baby-rank' */'@/pages/baby/rank/index.vue')
         }
       ]
     },

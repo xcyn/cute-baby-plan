@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="rank">
     <div :key="i" v-for="i in 4">
       <babyPerson/>
     </div>
@@ -9,7 +9,7 @@
 <script>
 import babyPerson from "../components/baby-person";
 export default {
-    name: 'babyAll',
+    name: 'babyRank',
     components: {
       babyPerson
     },
