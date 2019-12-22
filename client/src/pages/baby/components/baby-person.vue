@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="baby-person">
-      <img class="phone" src="https://oimagec4.ydstatic.com/image?id=-5397300958976572132&product=adpublish&w=520&h=347" alt="">
+    <div class="baby-person gline1">
+      <img class="phone" :src="data.photo" alt="">
       <div class="info">
-        <div class="number">1号</div>
-        <div class="name pt5">熊川宇</div>
-        <div class="votes pt5">100票</div>
-        <div class="vote-btn">
-              <div class="heart notVote"></div> <span class="vote-text">投他一票</span>
+        <div class="number">{{data.name}}</div>
+        <div class="name pt5">手机号: {{data.phone}}</div>
+        <div class="votes pt5">{{data.voteNum}}票</div>
+        <div class="vote-btn" @click="handleVote">
+            <div :class="{'notVote': !data.voteNum}" class="heart"></div> <span class="vote-text">投他一票</span>
         </div>
       </div>
     </div>
@@ -18,7 +18,17 @@
 export default {
   name: 'baby-person',
   props: {
-    msg: String
+    data: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+  },
+  methods: {
+    handleVote() {
+      this.$emit('vote', this.data)
+    }
   }
 }
 </script>
@@ -40,6 +50,7 @@ export default {
   font-weight 700
 .name
   color rgba(0,0,0,0.87)
+  width 150px
 .votes
   color rgba(0,0,0,0.6)
 .vote-btn
@@ -51,6 +62,7 @@ export default {
   font-size 13px
   display flex
   align-items center
+  width 120px
 .loveicon
   width 20px
   height 20px
@@ -82,7 +94,6 @@ export default {
 .heart.notVote::after
     background-color #fff
     border-left none
-    border-right none
 .vote-text
   padding-left 10px
   

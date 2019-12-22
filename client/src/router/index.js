@@ -16,17 +16,18 @@ const defaultPage = {
 }
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: isDev ? 'hash' :'history',
   base: isDev ? '/' : '/activity',
   routes: [
     {
       path: '/',
-      name: 'baby',
-      redirect: 'baby'
+      name: 'home',
+      redirect: '/baby/all'
     },
     {
       path: '/baby',
       name: 'baby',
+      redirect: '/baby/all',
       component: () => import(/* webpackChunkName: 'baby' */'@/pages/baby/index.vue'),
       children: [
         {

@@ -1,27 +1,38 @@
 // 定义全局路径
 global.APP_PATH = __dirname;
-
-var Koa = require('koa')
+const path = require('path')
+const Koa = require('koa')
 const koaBody = require('koa-body')
 const chalk = require('chalk')
-var appRoute = require('./routes')
+const appRoute = require('./routes')
+require('./mongodb/index')
 
 
 //中间件
-var response = require('./middleware/response');
-var app = new Koa();
+// 日志
+const log = require('./middleware/log')
+// 跨域中间件
+const cross = require('./middleware/cross')
+// 规范统一返回
+const response = require('./middleware/response')
+// 配置静态web服务的中间件
+const static = require("koa-static");
+const app = new Koa()
 
+app.use(log)
+app.use(cross)
 app.use(response)
+app.use(static(path.join( __dirname,  './static/')));
 app.use(koaBody({"multipart": true}))
 app.use(appRoute.routes())
-app.use(appRoute.allowedMethods());
+app.use(appRoute.allowedMethods())
 
 app.on('error', (err, ctx) => {
   console.error('server error', err)
   ctx.body = '请求报错了';
 });
 
-app.listen(8108,() => {
-  chalk.green('Server running on port 3099');
+app.listen(3099,() => {
+  chalk.green('Server running on port 3099')
 })
 

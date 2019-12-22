@@ -6,6 +6,7 @@ node_modules
 /client/package-lock.json
 /servers/node_modules
 /client/node_modules
+/servers/static
 
 # Editor directories and files
 .idea
