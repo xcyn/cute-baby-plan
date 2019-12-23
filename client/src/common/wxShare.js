@@ -20,8 +20,6 @@
         signature: signData.signature,// 必填，签名
         jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表
       });
-      // signData.url = 'http://lovebhs.xyz/blogs/home'
-      // console.log('signData.url', signData.url)
       golobal.wx.ready(function () {
         //分享到朋友
         golobal.wx.onMenuShareAppMessage({
