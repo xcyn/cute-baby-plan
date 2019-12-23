@@ -50,7 +50,7 @@ module.exports = async (ctx, next) => {
         info: infoSend(ctx),
       }
       // 记录每次请求的接口日志
-      ctx.state.log.info(ctx.url)
+      // ctx.state.log.info(ctx.url)
       await next();
   } catch (err) {
       ctx.state.log.error(err)
