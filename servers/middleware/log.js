@@ -1,6 +1,6 @@
 const dayjs = require("dayjs");
 const log4js = require("log4js");
-const isDev = process.env.NODE_ENV === "dev";
+const isDev = process.env.NODE_ENV === "development";
 const logFilePath = isDev ? "logs/" : "logs/"; // 部署之后配置待定
 const config = {
   appenders: {
