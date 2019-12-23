@@ -5,7 +5,7 @@ const isPro =  process.env.NODE_ENV === 'production'
 
 module.exports = {
   productionSourceMap: false,
-  publicPath: './',
+  publicPath: isPro ? '/dist/' : './',
 
   css: {
     loaderOptions: {
