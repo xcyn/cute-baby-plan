@@ -45,6 +45,7 @@
 
 <script>
 import request from '@/common/request'
+import wxShare from '@/common/wxShare'
 import babyRegister from "./components/register";
 import activeRule from "./components/activeRule";
 export default {
@@ -116,6 +117,13 @@ export default {
       this.getActiveData()
       this.updateVisitNum()
       this.monitor()
+    },
+    async mounted() {
+      wxShare({
+        title: '萌宝计划',
+        desc: '前端技术分享',
+        imgUrl: 'https://i.niupic.com/images/2019/11/05/_4.jpeg'
+      })
     }
 };
 </script>

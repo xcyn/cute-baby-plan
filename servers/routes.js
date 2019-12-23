@@ -8,10 +8,11 @@ var activeData = require('./controller/activeData/router')
 // 参赛人员
 var pothunter = require('./controller/pothunter/router')
 // 微信
-// var weixin = require('./controller/weixin/router')
-// 微信接口
-// appRouter.use(weixin)
+var weixin = require('./controller/weixin/router')
+
 appRouter.use('/babyService/activeData', activeData)
 appRouter.use('/babyService/pothunter', pothunter)
+// 微信接口
+appRouter.use(weixin)
 
 module.exports = appRouter
