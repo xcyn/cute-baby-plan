@@ -6,8 +6,11 @@
         <div class="number">{{data.name}}</div>
         <div class="name pt5">手机号: {{data.phone}}</div>
         <div class="votes pt5">{{data.voteNum}}票</div>
-        <div class="vote-btn" @click="handleVote">
-            <div :class="{'notVote': !data.voteNum}" class="heart"></div> <span class="vote-text">投他一票</span>
+        <div class="vote-btn" v-if="votes.indexOf(data.phone) != -1" @click="handleToast">
+            <div class="heart"></div> <span class="vote-text">投他一票</span>
+        </div>
+        <div class="vote-btn" v-if="votes.indexOf(data.phone) === -1" @click="handleVote">
+            <div class="heart notVote"></div> <span class="vote-text">投他一票</span>
         </div>
       </div>
     </div>
@@ -24,10 +27,19 @@ export default {
         return {}
       }
     },
+    votes: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
   },
   methods: {
     handleVote() {
       this.$emit('vote', this.data)
+    },
+    handleToast() {
+      alert('每人只能投一次数据')
     }
   }
 }

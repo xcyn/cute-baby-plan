@@ -9,9 +9,14 @@ module.exports = async (ctx) => {
     }
     const checkLogin = JSON.stringify(userInfo) === JSON.stringify(user)
     if(checkLogin) {
-      ctx.cookies.set("auth", `jwt+${userInfo.name}+${userInfo.password}`)
+      ctx.cookies.set("auth", `jwt-${userInfo.name}-${userInfo.password}`)
       ctx.state.res({
-        errmsg: '登录成功'
+        errmsg: '登录成功',
+        data: {
+          ...userInfo,
+          votes: hasuser.votes,
+          auth: `jwt-${userInfo.name}-${userInfo.password}`
+        }
       })
     } else {
       ctx.state.res({

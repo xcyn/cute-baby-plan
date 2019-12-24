@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <div :key="key" v-for="(pothunter, key) in pothunterList">
-      <babyPerson :data="pothunter" @vote="handleVote"/>
+      <babyPerson :data="pothunter" @vote="handleVote" :votes='votes'/>
     </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import request from '@/common/request'
 import babyPerson from "../components/baby-person";
+import storage from '@/common/storage'
 export default {
     name: 'babyAll',
     components: {
@@ -16,7 +17,8 @@ export default {
     },
     data() {
         return {
-          pothunterList: []
+          pothunterList: [],
+          votes: []
         };
     },
     methods: {
@@ -30,14 +32,30 @@ export default {
       },
       // 开始投票
       async handleVote(pothunter) {
+        const auth = storage.get('auth')
+        const userInfo = storage.get('userInfo')
+        if(!auth || !userInfo) {
+          this.checkLogin()
+          return
+        }
         const res = await request({
-          url: '/babyService/pothunter/vote',
+          url: `/babyService/pothunter/vote?auth=${auth}`,
           method: 'post',
-          params: pothunter
+          params: {
+            ...pothunter,
+            userName: userInfo.name
+          }
         })
         if(res && res.errno === 401) {
           this.checkLogin()
         } else {
+          storage.set('userInfo', {
+            ...userInfo,
+            votes: res.votes
+          })
+          if(res && res.votes) {
+            this.votes = res.votes
+          }
           this.init()
           this.$root.myEvent.$emit('rootRefresh')
         }
@@ -47,17 +65,26 @@ export default {
           propsData: {
               onLogin: async (data) => {
                   const res = await request({
-                    url: '/babyService/user/login',
+                    url: `/babyService/user/login`,
                     method: 'post',
                     params: data
                   })
-                  if(!res) {
+                  if(res && res.auth) {
+                    storage.set('auth', res.auth)
+                    storage.set('userInfo', res)
                     instance.hide();
                   }
               },
               onRegister: async (data) => {
-                  console.log('register', data)
-                  instance.hide();
+                  const res = await request({
+                    url: `/babyService/user/register`,
+                    method: 'post',
+                    params: data
+                  })
+                  if(res && !res.errno) {
+                    instance.hide();
+                    alert(res)
+                  }
               }
           },
         })
@@ -75,6 +102,10 @@ export default {
     created() {
       this.init()
       this.monitor()
+      const userInfo = storage.get('userInfo')
+      if(userInfo) {
+        this.votes = userInfo.votes
+      }
     }
 };
 </script>

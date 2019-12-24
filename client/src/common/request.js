@@ -12,6 +12,7 @@ const request = function (option = {}) {
       'Content-Type': 'application/json;charset=UTF-8'
     }
   }
+  console.log('13213', sendUrl)
   return axios({
     method,
     url: sendUrl,

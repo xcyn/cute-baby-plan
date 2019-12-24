@@ -1,7 +1,7 @@
 <template>
   <div class="rank">
     <div :key="key" v-for="(pothunter, key) in pothunterList">
-      <babyPerson :data="pothunter"  @vote="handleVote"/>
+      <babyPerson :data="pothunter"  @vote="handleVote" :votes='votes'/>
     </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import request from '@/common/request'
 import babyPerson from "../components/baby-person";
+import storage from '@/common/storage'
 export default {
     name: 'babyRank',
     components: {
@@ -16,7 +17,8 @@ export default {
     },
     data() {
         return {
-          pothunterList: []
+          pothunterList: [],
+          votes: []
         };
     },
     methods: {
@@ -33,13 +35,63 @@ export default {
       },
       // 开始投票
       async handleVote(pothunter) {
-        await request({
-          url: '/babyService/pothunter/vote',
+        const auth = storage.get('auth')
+        const userInfo = storage.get('userInfo')
+        if(!auth || !userInfo) {
+          this.checkLogin()
+          return
+        }
+        const res = await request({
+          url: `/babyService/pothunter/vote?auth=${auth}`,
           method: 'post',
-          params: pothunter
+          params: {
+            ...pothunter,
+            userName: userInfo.name
+          }
         })
-        this.init()
-        this.$root.myEvent.$emit('rootRefresh')
+        if(res && res.errno === 401) {
+          this.checkLogin()
+        } else {
+          storage.set('userInfo', {
+            ...userInfo,
+            votes: res.votes
+          })
+          if(res && res.votes) {
+            this.votes = res.votes
+          }
+          this.init()
+          this.$root.myEvent.$emit('rootRefresh')
+        }
+      },
+      checkLogin() {
+        const instance = this.$login({
+          propsData: {
+              onLogin: async (data) => {
+                  const res = await request({
+                    url: `/babyService/user/login`,
+                    method: 'post',
+                    params: data
+                  })
+                  if(res && res.auth) {
+                    storage.set('auth', res.auth)
+                    storage.set('userInfo', res)
+                    instance.hide();
+                  }
+              },
+              onRegister: async (data) => {
+                  const res = await request({
+                    url: `/babyService/user/register`,
+                    method: 'post',
+                    params: data
+                  })
+                  if(res && !res.errno) {
+                    instance.hide();
+                    alert(res)
+                  }
+              }
+          },
+        })
+        instance.show()
       },
       init() {
         this.getPothunterList()
@@ -53,6 +105,10 @@ export default {
     created() {
       this.getPothunterList()
       this.monitor()
+      const userInfo = storage.get('userInfo')
+      if(userInfo) {
+        this.votes = userInfo.votes
+      }
     }
 };
 </script>

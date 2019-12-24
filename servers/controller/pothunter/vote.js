@@ -1,5 +1,5 @@
 const { pothunterModel } = require('../../models')
-const { updateVoteNumApi } = require('../../api/updateVisit')
+const { updateVoteNumApi, updateUserVoteApi } = require('../../api/updateVisit')
 module.exports = async (ctx) => {
   let pothunter = ctx.request.body
   const hasPothunter = await pothunterModel.findOne({phone: pothunter.phone})
@@ -9,8 +9,16 @@ module.exports = async (ctx) => {
     })
     // 更新投票数据
     updateVoteNumApi(1)
+    // 更新用户投票数据
+    const votes = await updateUserVoteApi({
+      user: {name: pothunter.userName},
+      pothUnterId: pothunter.phone
+    })
     ctx.state.res({
-      data: '投票成功'
+      data: {
+        message: '投票成功',
+        votes: votes
+      }
     })
   } else {
     ctx.state.res({

@@ -5,7 +5,7 @@ const authLists = ['/babyService/pothunter/vote']
 module.exports = async (ctx, next) => {
   const path = ctx.path
   if(authLists.indexOf(path) !== -1) {
-    const auth = ctx.cookies.get("auth")
+    const auth = ctx.request.query.auth
     if(!auth) {
       ctx.state.res({
         errno: 401,
@@ -13,7 +13,7 @@ module.exports = async (ctx, next) => {
       })
       return
     } else {
-      const auths = auth.split('+')
+      const auths = auth.split('-')
       let user = {
         name: auths[1],
         password: auths[2]

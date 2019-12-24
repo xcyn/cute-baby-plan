@@ -8,7 +8,10 @@ module.exports = async (ctx) => {
       errmsg: '已存在用户',
     })
   } else {
-    const userApi = new userModel(user);
+    const userApi = new userModel({
+      ...user,
+      votes: []
+    });
     try {
       await userApi.save()
       ctx.state.res({

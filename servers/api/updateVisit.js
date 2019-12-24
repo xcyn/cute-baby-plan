@@ -1,4 +1,4 @@
-const { activeDataModel } = require('../models')
+const { activeDataModel, userModel } = require('../models')
 
 // 更新参赛人数
 async function updatePothunterNum(num = 1) {
@@ -37,8 +37,24 @@ async function updateVoteNum(num = 1) {
   }
 }
 
+// 更新用户投票
+async function updateUserVote(option={}) {
+  try {
+    let data = await userModel.findOne(option.user)
+    let votes = data.votes
+    votes.push(option.pothUnterId)
+    await userModel.findOneAndUpdate(option.user, {
+      votes
+    })
+    return votes
+  } catch(err) {
+    throw err
+  }
+}
+
 module.exports = {
   updatePothunterNumApi: updatePothunterNum,
   updateVisitNumApi: updateVisitNum,
-  updateVoteNumApi: updateVoteNum
+  updateVoteNumApi: updateVoteNum,
+  updateUserVoteApi: updateUserVote
 }
