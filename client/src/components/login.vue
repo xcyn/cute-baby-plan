@@ -42,7 +42,6 @@ export default {
   },
   methods: {
     show() {
-      console.log(112312311)
       this.visible = true
     },
     hide() {
@@ -50,10 +49,10 @@ export default {
     },
     handleRegister() {
       const { data } = this
-      const rule = /[\u4e00-\u9fa5a-zA-Z]+/
-      const ishz = rule.test(data.name) || rule.test(data.password)
-      if(ishz) {
-        alert('不能包含汉字')
+      const rule = /^[A-Za-z0-9]+$/
+      const ishz = rule.test(data.name) && rule.test(data.password)
+      if(!ishz) {
+        alert('只能输入英文和汉字')
         return
       }
       if(!data.name || !data.password) {
@@ -64,10 +63,10 @@ export default {
     },
     handleLogin() {
       const { data } = this
-      const rule = /[\u4e00-\u9fa5a-zA-Z]+/
-      const ishz = rule.test(data.name) || rule.test(data.password)
-      if(ishz) {
-        alert('不能包含汉字')
+      const rule = /^[A-Za-z0-9]+$/
+      const ishz = rule.test(data.name) && rule.test(data.password)
+      if(!ishz) {
+        alert('只能输入英文和汉字')
         return
       }
       if(!data.name || !data.password) {
