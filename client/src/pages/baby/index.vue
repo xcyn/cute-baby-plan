@@ -119,10 +119,10 @@ export default {
       this.monitor()
     },
     async mounted() {
-      wxShare({
+      await wxShare({
         title: '萌宝计划',
         desc: '前端技术分享',
-        imgUrl: 'https://i.niupic.com/images/2019/11/05/_4.jpeg'
+        imgUrl: 'https://i.niupic.com/images/2019/12/24/6aI9.png'
       })
     }
 };
