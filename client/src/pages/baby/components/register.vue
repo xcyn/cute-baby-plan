@@ -12,7 +12,7 @@
           <span class="input-name">上传照片:</span>
           <img v-if="!data.photo" class="upload-img" src="https://files.jb51.net/file_images/article/201808/2018080615594711.png" alt="">
           <img v-if="data.photo" class="upload-img" :src="data.photo" alt="">
-          <input class="file" type="file" accept="image/jpeg,image/jpg,image/png,image/gif" @change="onChange">
+          <input class="file" type="file" accept="image/*" @change="onChange">
         </div>
         <div class="button">
           <div class="button-text" @click="handleJoin">
