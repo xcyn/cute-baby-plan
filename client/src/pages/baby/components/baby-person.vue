@@ -40,8 +40,10 @@ export default {
   background-color #fff
   padding 20px
   border-radius 10px
+  margin-bottom 20px
 .phone
   width 50%
+  max-height 100px
 .info
   flex none
   font-size 15px
