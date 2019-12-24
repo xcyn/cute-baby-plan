@@ -32,7 +32,7 @@ app.on('error', (err, ctx) => {
   ctx.body = '请求报错了';
 });
 
-app.listen(3099,() => {
-  chalk.green('Server running on port 3099')
+app.listen(3100,() => {
+  chalk.green('Server running on port 3100')
 })
 
