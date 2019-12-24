@@ -4,7 +4,7 @@
       <div class="rule-c">
         <div class="tilte">活动规则</div>
         <div class="rule-item">
-          1、本次活动为网络评选活动, 每人可以投多张票
+          1、本次活动为网络评选活动, 每个人只能给每个参赛者投一张票
         </div>
         <div class="rule-item">
           2、登录后的用户才可以投票
