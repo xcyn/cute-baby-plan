@@ -39,7 +39,8 @@
       <router-view></router-view>
     </div>
     <babyRegister ref="babyRegister" @ok="handleJoin"/>
-    <activeRule ref="activeRule" @ok="handleActiveRule"/>
+    <activeRule ref="activeRule"/>
+    <registerUser ref="registerUser" @register="handleRegisterUser" @login="handleLogin"/>
   </div>
 </template>
 
@@ -48,11 +49,13 @@ import request from '@/common/request'
 import wxShare from '@/common/wxShare'
 import babyRegister from "./components/register";
 import activeRule from "./components/activeRule";
+import registerUser from "./components/registerUser";
 export default {
     name: 'baby',
     components: {
       babyRegister,
-      activeRule
+      activeRule,
+      registerUser
     },
     data() {
         return {
@@ -91,6 +94,11 @@ export default {
       seeRule() {
         this.$refs.activeRule.show()
       },
+      // 检验用户登录
+      checkLogin() {
+        const registerUser = this.$refs.registerUser
+        registerUser.show()
+      },
       async handleJoin(data) {
         const res = await request({
           url: '/babyService/pothunter/save',
@@ -104,8 +112,15 @@ export default {
           this.$root.myEvent.$emit('childRefresh')
         }
       },
-      handleActiveRule() {
-        this.$refs.activeRule.show()        
+      handleRegisterUser() {
+        const registerUser = this.$refs.registerUser
+        registerUser.hide()
+        console.log('注册用户')
+      },
+      handleLogin() {
+        const registerUser = this.$refs.registerUser
+        registerUser.hide()
+        console.log('登录')
       },
       monitor() {
         this.$root.myEvent.$on('rootRefresh', () => {
@@ -124,6 +139,7 @@ export default {
         desc: '前端技术分享',
         imgUrl: 'https://i.niupic.com/images/2019/12/24/6aI9.png'
       })
+      this.checkLogin()
     }
 };
 </script>
@@ -139,6 +155,15 @@ export default {
   position absolute
   top 20px
   right 10px
+  font-size 13px
+  padding 7px
+  background-color rgba(0,0,0,0.3)
+  border-radius 4px
+  color rgba(255,255,255,0.8)
+.registerUser
+  position absolute
+  bottom 20px
+  left 10px
   font-size 13px
   padding 7px
   background-color rgba(0,0,0,0.3)

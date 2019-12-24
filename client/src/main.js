@@ -4,7 +4,6 @@ import router from './router'
 import 'normalize.css'
 
 Vue.config.productionTip = false
-console.log('添加jenkins部署')
 
 new Vue({
   router,
