@@ -10,7 +10,7 @@
 - 链接地址: <a href="http://lovebhs.xyz/activity">地址</a>
 - jenkins部署总结: <a href="https://www.jianshu.com/p/9049efacdbdb">地址</a>
 ## 二、项目目的
-- 介绍前端整个流程、开发、部署，便于沟通
+- 介绍前端整个流程、开发、部署，便于团队之间沟通
 - 后续类似活动页可以开发
     
 

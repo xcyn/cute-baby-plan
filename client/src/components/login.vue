@@ -50,6 +50,12 @@ export default {
     },
     handleRegister() {
       const { data } = this
+      const rule = /[\u4e00-\u9fa5a-zA-Z]+/
+      const ishz = rule.test(data.name) || rule.test(data.password)
+      if(ishz) {
+        alert('不能包含汉字')
+        return
+      }
       if(!data.name || !data.password) {
         alert('请填写姓名和密码')
       } else {
@@ -58,6 +64,12 @@ export default {
     },
     handleLogin() {
       const { data } = this
+      const rule = /[\u4e00-\u9fa5a-zA-Z]+/
+      const ishz = rule.test(data.name) || rule.test(data.password)
+      if(ishz) {
+        alert('不能包含汉字')
+        return
+      }
       if(!data.name || !data.password) {
         alert('请填写姓名和密码')
       } else {
