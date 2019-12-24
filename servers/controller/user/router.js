@@ -8,7 +8,6 @@ var login = require('./login')
 
 appRouter.get('/get', get)
 appRouter.post('/register', register)
-
 appRouter.post('/login', login)
 
 

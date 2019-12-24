@@ -98,7 +98,6 @@ export default {
           params: data
         })
         if(res) {
-          alert(res)
           this.getActiveData()
           this.$refs.babyRegister.hide()
           this.$root.myEvent.$emit('childRefresh')
