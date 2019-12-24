@@ -40,7 +40,6 @@
     </div>
     <babyRegister ref="babyRegister" @ok="handleJoin"/>
     <activeRule ref="activeRule"/>
-    <registerUser ref="registerUser" @register="handleRegisterUser" @login="handleLogin"/>
   </div>
 </template>
 
@@ -49,13 +48,11 @@ import request from '@/common/request'
 import wxShare from '@/common/wxShare'
 import babyRegister from "./components/register";
 import activeRule from "./components/activeRule";
-import registerUser from "./components/registerUser";
 export default {
     name: 'baby',
     components: {
       babyRegister,
       activeRule,
-      registerUser
     },
     data() {
         return {
@@ -94,11 +91,6 @@ export default {
       seeRule() {
         this.$refs.activeRule.show()
       },
-      // 检验用户登录
-      checkLogin() {
-        const registerUser = this.$refs.registerUser
-        registerUser.show()
-      },
       async handleJoin(data) {
         const res = await request({
           url: '/babyService/pothunter/save',
@@ -111,16 +103,6 @@ export default {
           this.$refs.babyRegister.hide()
           this.$root.myEvent.$emit('childRefresh')
         }
-      },
-      handleRegisterUser() {
-        const registerUser = this.$refs.registerUser
-        registerUser.hide()
-        console.log('注册用户')
-      },
-      handleLogin() {
-        const registerUser = this.$refs.registerUser
-        registerUser.hide()
-        console.log('登录')
       },
       monitor() {
         this.$root.myEvent.$on('rootRefresh', () => {
@@ -139,7 +121,6 @@ export default {
         desc: '前端技术分享',
         imgUrl: 'https://i.niupic.com/images/2019/12/24/6aI9.png'
       })
-      this.checkLogin()
     }
 };
 </script>

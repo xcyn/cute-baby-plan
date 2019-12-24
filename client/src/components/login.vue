@@ -22,7 +22,17 @@
 
 <script>
 export default {
-  name: 'baby-register-user',
+  name: 'login',
+  props: {
+    onLogin: {
+        type: Function,
+        default: () => {}
+    },
+    onRegister: {
+        type: Function,
+        default: () => {}
+    },
+  },
   data() {
     return {
       type: 'register',
@@ -32,6 +42,7 @@ export default {
   },
   methods: {
     show() {
+      console.log(112312311)
       this.visible = true
     },
     hide() {
@@ -42,7 +53,7 @@ export default {
       if(!data.name || !data.password) {
         alert('请填写姓名和密码')
       } else {
-        this.$emit('register', data)
+          this._props.onRegister(data)
       }
     },
     handleLogin() {
@@ -50,7 +61,7 @@ export default {
       if(!data.name || !data.password) {
         alert('请填写姓名和密码')
       } else {
-        this.$emit('login', data)
+          this._props.onLogin(data)
       }
     }
   }
@@ -66,6 +77,7 @@ export default {
   top 0
   left 0
   z-index 98
+  background-color rgba(0,0,0,0.3)
 .join-register
   width 300px
   margin 0 auto

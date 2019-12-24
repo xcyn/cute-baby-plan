@@ -30,13 +30,38 @@ export default {
       },
       // 开始投票
       async handleVote(pothunter) {
-        await request({
+        const res = await request({
           url: '/babyService/pothunter/vote',
           method: 'post',
           params: pothunter
         })
-        this.init()
-        this.$root.myEvent.$emit('rootRefresh')
+        if(res && res.errno === 401) {
+          this.checkLogin()
+        } else {
+          this.init()
+          this.$root.myEvent.$emit('rootRefresh')
+        }
+      },
+      checkLogin() {
+        const instance = this.$login({
+          propsData: {
+              onLogin: async (data) => {
+                  const res = await request({
+                    url: '/babyService/user/login',
+                    method: 'post',
+                    params: data
+                  })
+                  if(!res) {
+                    instance.hide();
+                  }
+              },
+              onRegister: async (data) => {
+                  console.log('register', data)
+                  instance.hide();
+              }
+          },
+        })
+        instance.show()
       },
       init() {
         this.getPothunterList()

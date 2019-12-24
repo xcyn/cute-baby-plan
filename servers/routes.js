@@ -7,11 +7,15 @@ var appRouter = new Router();
 var activeData = require('./controller/activeData/router')
 // 参赛人员
 var pothunter = require('./controller/pothunter/router')
+// 用户系统
+var user = require('./controller/user/router')
 // 微信
 var weixin = require('./controller/weixin/router')
 
 appRouter.use('/babyService/activeData', activeData)
 appRouter.use('/babyService/pothunter', pothunter)
+appRouter.use('/babyService/user', user)
+
 // 微信接口
 appRouter.use(weixin)
 

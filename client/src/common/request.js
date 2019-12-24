@@ -33,7 +33,8 @@ axios.interceptors.response.use(
           return response.data || {};
       } else {
         // todo: 可优化成组件弹窗
-        alert('接口请求失败')
+        alert(response.data.errmsg || '接口请求失败')
+        return response
       }
   },
   function (error) {

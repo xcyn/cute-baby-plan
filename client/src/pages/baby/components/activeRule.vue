@@ -7,7 +7,10 @@
           1、本次活动为网络评选活动, 每人可以投多张票
         </div>
         <div class="rule-item">
-          2、最终解释权归我所有～
+          2、登录后的用户才可以投票
+        </div>
+        <div class="rule-item">
+          3、最终解释权归我所有～
         </div>
       </div>
     </div>
