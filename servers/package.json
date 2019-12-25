@@ -12,12 +12,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "config": "^3.2.3",
-    "cookies": "^0.7.3",
     "cross-env": "^5.2.0",
     "dayjs": "^1.8.15",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
-    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "lodash": "^4.17.11",
@@ -25,8 +23,7 @@
     "mongoose": "^5.7.3",
     "pm2": "^3.4.0",
     "qs": "^6.6.0",
-    "sha1": "^1.1.1",
-    "validator": "^10.11.0"
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
     "chalk": "^3.0.0",
