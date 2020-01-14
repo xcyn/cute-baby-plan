@@ -1,4 +1,5 @@
 const { userModel } = require('../../models')
+const jwtUtils = require('../../utils/jwt')
 module.exports = async (ctx) => {
   let user = ctx.request.body
   const hasuser = await userModel.findOne({name: user.name})
@@ -9,13 +10,17 @@ module.exports = async (ctx) => {
     }
     const checkLogin = JSON.stringify(userInfo) === JSON.stringify(user)
     if(checkLogin) {
-      ctx.cookies.set("auth", `jwt-${userInfo.name}-${userInfo.password}`)
+      const jwt = await jwtUtils.jwtSign({
+        name: userInfo.name,
+        password: userInfo.password
+      })
+      ctx.cookies.set("auth", jwt)
       ctx.state.res({
         errmsg: '登录成功',
         data: {
           ...userInfo,
           votes: hasuser.votes,
-          auth: `jwt-${userInfo.name}-${userInfo.password}`
+          auth: jwt
         }
       })
     } else {

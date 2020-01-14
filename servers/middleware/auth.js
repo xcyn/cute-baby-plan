@@ -1,4 +1,5 @@
 const { checkLoginApi } = require('../api/checkLogin')
+const jwtUtils = require('../utils/jwt')
 // 需要登录的接口
 const authLists = ['/babyService/pothunter/vote']
 // 判断登录
@@ -13,12 +14,13 @@ module.exports = async (ctx, next) => {
       })
       return
     } else {
-      const auths = auth.split('-')
-      let user = {
-        name: auths[1],
-        password: auths[2]
-      }
-      const isLogin = await checkLoginApi(user)
+      const userInfo = await jwtUtils.jwtVerify({
+        jwt: auth
+      })
+      const isLogin = await checkLoginApi({
+        name: userInfo.name,
+        password: userInfo.password
+      })
       if(!isLogin) {
         ctx.state.res({
           errno: 401,
